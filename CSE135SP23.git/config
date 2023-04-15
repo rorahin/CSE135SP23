@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/rorahin/CSE135SP23.git
+[remote "prod"]
+	url = ssh://rorahin@206.189.198.16.com/var/repo/CSE135SP23.git
+	fetch = +refs/heads/*:refs/remotes/prod/*
