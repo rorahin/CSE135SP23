@@ -1,12 +1,12 @@
 .header {
     padding: 0.3cm;
     float: left;
-    width: 60%;
-    height: 6cm;
+    width: 61%;
+    height: 5.5cm;
 }
 .team {
     padding: 0.1cm;
-    width: 30%;
+    width: 32%;
     float: right;
     display: block;
     background-color: lightgrey;
