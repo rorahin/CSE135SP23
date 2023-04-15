@@ -1,0 +1,27 @@
+.header {
+    padding: 0.3cm;
+    float: left;
+    width: 60%;
+    height: 6cm;
+}
+.team {
+    padding: 0.1cm;
+    width: 30%;
+    float: right;
+    display: block;
+    background-color: lightgrey;
+}
+
+.content {
+    background-color: lightgrey;
+    padding: 0.3cm;
+}
+
+.title {
+    margin-bottom: 0cm;
+}
+
+#footer {
+    margin: 1cm;
+    text-align: center;
+}
