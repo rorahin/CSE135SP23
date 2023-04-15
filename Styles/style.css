@@ -5,7 +5,7 @@
     height: 5.5cm;
 }
 .team {
-    padding: 0.1cm;
+    padding: 0.2cm;
     width: 32%;
     float: right;
     display: block;
@@ -21,9 +21,6 @@
     margin-bottom: 0cm;
 }
 
-footer {
-
-}
 
 #footer {
     position: absolute;
