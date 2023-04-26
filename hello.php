@@ -10,7 +10,6 @@
     <?php
       phpinfo();
      ?>
-    
+
 </body>
 </html>
-
