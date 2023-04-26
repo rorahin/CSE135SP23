@@ -21,4 +21,7 @@ int main(void)
  printf("</body></html>");
  return 1;
  }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20de7ddbdcf6a1281fe7f6b4148b306cacc95d81

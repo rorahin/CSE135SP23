@@ -1,8 +1,0 @@
-name: deploy-to-digitalocean
-run-name: ${{ github.actor }} is deploying to new changes to DigitalOcean server
-on: [push]
-jobs:
-  deploy-to-digitalocean:
-    runs-on: ubunto-latest
-    steps:
-      - uses: actions/chechout@v3

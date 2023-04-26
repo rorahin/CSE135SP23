@@ -34,4 +34,7 @@ int main(int argc, char **argv, char **envp)
   printf("</html>");
   return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20de7ddbdcf6a1281fe7f6b4148b306cacc95d81
