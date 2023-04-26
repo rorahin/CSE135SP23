@@ -16,13 +16,9 @@ int main(int argc, char **argv, char **envp)
   printf("<tr><td>Protocol:</td><td>%s</td></tr>\n", getenv("SERVER_PROTOCOL"));
   printf("<tr><td>Method:</td><td>%s</td></tr>\n", getenv("REQUEST_METHOD"));
   printf("<tr><td>Message Body:</td><td> %s</td></tr>\n", fgets(str, 1000, stdin));
-  
+
   // Print HTML footer
   printf("</body>");
   printf("</html>");
   return 0;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 20de7ddbdcf6a1281fe7f6b4148b306cacc95d81
