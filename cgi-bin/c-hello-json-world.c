@@ -14,7 +14,3 @@ int main(void) {
 	printf("\t\"currentIP\": \"%s\"\n}\n", getenv("REMOTE_ADDR"));
 	return 1;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 20de7ddbdcf6a1281fe7f6b4148b306cacc95d81
