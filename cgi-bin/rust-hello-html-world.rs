@@ -1,5 +1,5 @@
-#!/usr/bin/env rust
 
+use chrono;
 fn main() {
     
     //printing HTML header
