@@ -4,6 +4,6 @@ print("Cache-Control: no-cache")
 print("Content-Type: text/html")
 
 print()
-print("<html><head><title>Python Environment Variables</title></head><body>")
+print ("<h1 align='center'>Environment Variables</h1><hr />")
 for key, value in os.environ.items():
-    print(f"<p><b>{key}</b>: {value}</p>")
+    print("<b>", key, ":</b>", value, "<br />")
