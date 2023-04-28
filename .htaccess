@@ -24,7 +24,4 @@ AddOutputFilterByType DEFLATE text/xml
 ErrorDocument 404 /error404.html
 </IfModule>
 
-<Files "index.html">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
-</Files>
 
