@@ -50,9 +50,9 @@ if name:
 else:
     print("<p><b>Name:</b> You do not have a name set</p>")
 print("<br/><br/>")
-print('<a href="/cgi-bin/python-sessions-1.py">Session Page 1</a><br/>')
+print('<a href="/cgi-bin/py-sessions-1.py">Session Page 1</a><br/>')
 print('<a href="/python-cgiform.html">Python CGI Form</a><br/>')
-print('<form style="margin-top:30px" action="/cgi-bin/python-destroy-session.py" method="get">')
+print('<form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">')
 print('<button type="submit">Destroy Session</button>')
 print('</form>')
 print("</body>")
