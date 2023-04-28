@@ -17,3 +17,6 @@ for p in query:
     print("<tr><td>%-8s:</td><td>%s</td></tr>\n" % (var, val))
 print("</table>")
 
+# Print closing HTML tags
+print("</body>")
+print("</html>")
