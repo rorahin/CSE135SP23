@@ -1,63 +1,35 @@
-
-
 <?php
-header("Cache-Control: no-cache");
+// Create a new PHP Session
+session_start();
 
-// Get Name from Environment
-$username = fgets(STDIN);
+// Create CGI Object
+$cgi = new CGI();
 
-// Check to see if a proper name was sent
-$name = "";
-if ($username[0] == 'u')
-{
-  $name = substr($username, 9);
-}
+// Create a new Cookie from the Session ID
+$cookie = $cgi->cookie("CGISESSID", session_id());
+echo $cgi->header(array("cookie"=>$cookie));
 
-// Set the cookie using a header, add extra \n to end headers
-if (strlen($name) > 0)
-{
-  header("Content-type: text/html");
-  header("Set-Cookie: " . $name);
-  echo "\n";
-}
-else
-{
-  header("Content-type: text/html");
-  echo "\n";
-}
+// Store Data in that PHP Session
+$name = isset($_SESSION['username']) ? $_SESSION['username'] : $cgi->param('username');
+$_SESSION["username"] = $name;
 
-// Body - HTML
 echo "<html>";
-echo "<head><title>PHP Sessions</title></head>\n";
+echo "<head>";
+echo "<title>PHP Sessions</title>";
+echo "</head>";
 echo "<body>";
+
 echo "<h1>PHP Sessions Page 1</h1>";
-echo "<table>";
 
-// First check for new Cookie, then Check for old Cookie
-if (strlen($name) > 0)
-{
-  echo "<tr><td>Cookie:</td><td>" . $name . "</td></tr>\n";
+if ($name){
+  echo "<p><b>Name:</b> $name</p>";
+}else{
+  echo "<p><b>Name:</b> You do not have a name set</p>";
 }
-else if (isset($_COOKIE) && $_COOKIE != "destroyed")
-{
-  echo "<tr><td>Cookie:</td><td>" . $_COOKIE . "</td></tr>\n";
-}
-else
-{
-  echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
-}
-
-echo "</table>";
-
-// Links for other pages
-echo "<br />";
-echo "<a href=\"/cgi-bin/php-sessions-2.php\">Session Page 2</a>";
-echo "<br />";
-echo "<a href=\"/php-cgiform.html\">C CGI Form</a>";
-echo "<br /><br />";
-
-// Destroy Cookie button
-echo "<form action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
+echo "<br/><br/>";
+echo "<a href=\"/cgi-bin/php-sessions-2.php\">Session Page 2</a><br/>";
+echo "<a href=\"/php-cgiform.html\">PHP CGI Form</a><br />";
+echo "<form style=\"margin-top:30px\" action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
 echo "<button type=\"submit\">Destroy Session</button>";
 echo "</form>";
 

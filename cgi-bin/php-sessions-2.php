@@ -1,34 +1,39 @@
 <?php
-// Headers
-header("Cache-Control: no-cache");
-header("Content-type: text/html");
+// Access PHP Session
+session_start();
 
-// Body - HTML
+// Create a new CGI Object
+$cgi = new CGI();
+
+// Get the Session ID from the Cookie
+$sid = isset($_COOKIE['CGISESSID']) ? $_COOKIE['CGISESSID'] : null;
+$session = new CGI::Session(undef, $sid, {Directory=>'/tmp'});
+
+// Access Stored Data
+$name = $session->param("username");
+
+header("Content-Type: text/html");
+
 echo "<html>";
-echo "<head><title>PHP Sessions</title></head>\n";
+echo "<head>";
+echo "<title>PHP Sessions</title>";
+echo "</head>";
 echo "<body>";
+
 echo "<h1>PHP Sessions Page 2</h1>";
-echo "<table>";
 
-if (isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"] !== "destroyed") {
-    echo "<tr><td>Cookie:</td><td>" . $_COOKIE["PHPSESSID"] . "</td></tr>\n";
-} else {
-    echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
+if ($name){
+	echo "<p><b>Name:</b> $name</p>";
+}else{
+	echo "<p><b>Name:</b> You do not have a name set</p>";
 }
-
-echo "</table>";
-
-// Links for other pages
-echo "<br />";
-echo "<a href=\"/cgi-bin/\php-sessions-1.php\">Session Page 1</a>";
-echo "<br />";
-echo "<a href=\"/php-cgiform.html\">C CGI Form</a>";
-echo "<br /><br />";
-
-// Destroy Cookie button
-echo "<form action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
+echo "<br/><br/>";
+echo "<a href=\"/cgi-bin/php-sessions-1.php\">Session Page 1</a><br/>";
+echo "<a href=\"/php-cgiform.html\">PHP CGI Form</a><br />";
+echo "<form style=\"margin-top:30px\" action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
 echo "<button type=\"submit\">Destroy Session</button>";
 echo "</form>";
 
 echo "</body>";
 echo "</html>";
+?>
