@@ -24,10 +24,22 @@ cgi_obj = cgi.FieldStorage()
 cookie = cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 session_id = cookie["CGISESSID"].value if "CGISESSID" in cookie else None
 
+# If session_id is None, create a new session ID
+if session_id is None:
+    session_id = str(uuid.uuid4())
+
 # Load session data from file
 session_path = os.path.join(session_directory, session_id)
-with open(session_path, "rb") as f:
-    session = pickle.load(f)
+
+# Add a check to see if the session file exists before attempting to load it
+if os.path.exists(session_path):
+    with open(session_path, "rb") as f:
+        session = pickle.load(f)
+else:
+    session = {}
+    # Save the new session data to the file
+    with open(session_path, "wb") as f:
+        pickle.dump(session, f)
 
 # Access Stored Data
 name = session.get("username")
@@ -51,10 +63,9 @@ else:
     print("<p><b>Name:</b> You do not have a name set</p>")
 print("<br/><br/>")
 print('<a href="/cgi-bin/py-sessions-1.py">Session Page 1</a><br/>')
-print('<a href="/python-cgiform.html">Python CGI Form</a><br/>')
+print('<a href="/py-cgiform.html">Python CGI Form</a><br/>')
 print('<form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">')
 print('<button type="submit">Destroy Session</button>')
 print('</form>')
 print("</body>")
 print("</html>")
-

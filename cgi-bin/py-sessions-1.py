@@ -26,7 +26,6 @@ cgi_obj = cgi.FieldStorage()
 # Create a new Cookie from the Session ID
 cookie = cookies.SimpleCookie()
 cookie["CGISESSID"] = session_id
-print(cookie)
 
 # Store Data in that Python Session
 name = session.get("username") or cgi_obj.getvalue("username")
@@ -55,10 +54,9 @@ else:
     print("<p><b>Name:</b> You do not have a name set</p>")
 print("<br/><br/>")
 print('<a href="/cgi-bin/py-sessions-2.py">Session Page 2</a><br/>')
-print('<a href="/python-cgiform.html">Python CGI Form</a><br/>')
+print('<a href="/py-cgiform.html">Python CGI Form</a><br/>')
 print('<form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">')
 print('<button type="submit">Destroy Session</button>')
 print('</form>')
 print("</body>")
 print("</html>")
-

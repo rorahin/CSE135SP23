@@ -1,0 +1,11 @@
+[package]
+name = "myproject"
+version = "0.1.0"
+authors = ["Your Name <your@email.com>"]
+
+[[bin]]
+name = "mylib"
+path = "src/lib.rs"
+
+[dependencies]
+chrono = { version = "0.4", features = ["serde"] }
