@@ -1,34 +1,29 @@
 <?php
-// Headers
-header("Cache-Control: no-cache");
-header("Content-type: text/html");
+// Start session
+session_start();
 
-// Body - HTML
-echo "<html>";
-echo "<head><title>PHP Sessions</title></head>\n";
-echo "<body>";
-echo "<h1>PHP Sessions Page 2</h1>";
-echo "<table>";
-
-if (isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"] !== "destroyed") {
-    echo "<tr><td>Cookie:</td><td>" . $_COOKIE["PHPSESSID"] . "</td></tr>\n";
+// Check if username is set in session
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
 } else {
-    echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
+    $username = 'unknown';
 }
+?>
 
-echo "</table>";
+<!DOCTYPE html>
+<html lang="en">
 
-// Links for other pages
-echo "<br />";
-echo "<a href=\"/cgi-bin/\php-sessions-1.php\">Session Page 1</a>";
-echo "<br />";
-echo "<a href=\"/php-cgiform.html\">C CGI Form</a>";
-echo "<br /><br />";
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Demo 2</title>
+</head>
 
-// Destroy Cookie button
-echo "<form action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
-echo "<button type=\"submit\">Destroy Session</button>";
-echo "</form>";
+<body>
+    <h1>State Demo 2</h1>
+    <p>Hello <?php echo $username; ?>!</p>
+    <a href="state-demo.php">Go back</a>
+</body>
 
-echo "</body>";
-echo "</html>";
+</html>
