@@ -3,60 +3,62 @@
 import os
 import cgi
 import cgitb
-import http.cookies
-import tempfile
+import uuid
+import shelve
 
-# Enable CGI error reporting
 cgitb.enable()
 
-# Create a new Python Session
-from http import cookies
-from urllib.parse import urlparse
-import uuid
-import pickle
+cookie_string = os.environ.get("HTTP_COOKIE")
+if cookie_string:
+    cookie_list = [x.strip().split('=', 1) for x in cookie_string.split(';') if '=' in x]
+    cookies = {key: value for key, value in cookie_list}
+else:
+    cookies = {}
 
-session_directory = "/tmp"
-session_id = str(uuid.uuid4())
-session_path = os.path.join(session_directory, session_id)
-session = {}
+session_id = cookies.get("session_id", None)
 
-# Create CGI Object
-cgi_obj = cgi.FieldStorage()
+if session_id:
+    session_file = '/var/www/CSE135SP23/cgi-bin/sessions/' + session_id
+    with shelve.open(session_file) as session:
+        username = session.get("username", None)
+else:
+    form = cgi.FieldStorage()
+    username = form.getvalue("username")
+    session_id = str(uuid.uuid4())
+    session_file = '/var/www/CSE135SP23/cgi-bin/sessions/' + session_id
 
-# Create a new Cookie from the Session ID
-cookie = cookies.SimpleCookie()
-cookie["CGISESSID"] = session_id
 
-# Store Data in that Python Session
-name = session.get("username") or cgi_obj.getvalue("username")
-session["username"] = name
+if username:
+    with shelve.open(session_file) as session:
+        session["username"] = username
 
-# Save session data to file
-with open(session_path, "wb") as f:
-    pickle.dump(session, f)
+    print(f"Set-Cookie: session_id={session_id}")
 
-# Print HTML output
-print("Content-Type: text/html")
+# Output headers and HTML
+print("Content-type: text/html")
 print()
-
-print("""<!DOCTYPE html>
+print("""
 <html>
 <head>
-    <title>Python Sessions</title>
+<title>Python Sessions</title>
 </head>
 <body>
-    <h1>Python Sessions Page 1</h1>
+
+<h1>Python Sessions Page 1</h1>
 """)
 
-if name:
-    print("<p><b>Name:</b>", name, "</p>")
+if username:
+    print(f"<p><b>Name:</b> {username}")
 else:
     print("<p><b>Name:</b> You do not have a name set</p>")
-print("<br/><br/>")
-print('<a href="/cgi-bin/py-sessions-2.py">Session Page 2</a><br/>')
-print('<a href="/py-cgiform.html">Python CGI Form</a><br/>')
-print('<form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">')
-print('<button type="submit">Destroy Session</button>')
-print('</form>')
-print("</body>")
-print("</html>")
+print("""
+<br/><br/>
+<a href="/cgi-bin/py-sessions-2.py">Session Page 2</a><br/>
+<a href="/py-cgiform.html">Python CGI Form</a><br />
+<form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">
+<button type="submit">Destroy Session</button>
+</form>
+
+</body>
+</html>
+""")
