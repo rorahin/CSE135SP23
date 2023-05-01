@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import cgi
@@ -25,12 +25,18 @@ cookie = cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 session_id = cookie["CGISESSID"].value if "CGISESSID" in cookie else None
 
 # Load session data from file
-session_path = os.path.join(session_directory, session_id)
-with open(session_path, "rb") as f:
-    session = pickle.load(f)
+if session_id is not None:
+    # Load session data from file
+    session_path = os.path.join(session_directory, session_id)
+    with open(session_path, "rb") as f:
+        session = pickle.load(f)
 
-# Destroy the session
-os.remove(session_path)
+    # Destroy the session
+    os.remove(session_path)
+    destroyed_message = "Session Destroyed"
+else:
+    destroyed_message = "No session to destroy"
+
 
 # Print HTML output
 print("Content-Type: text/html")
@@ -44,8 +50,8 @@ print("""<!DOCTYPE html>
 <body>
     <h1>Session Destroyed</h1>
     <a href="/python-cgiform.html">Back to the Python CGI Form</a><br/>
-    <a href="/cgi-bin/python-sessions-1.py">Back to Page 1</a><br/>
-    <a href="/cgi-bin/python-sessions-2.py">Back to Page 2</a>
+    <a href="/cgi-bin/py-sessions-1.py">Back to Page 1</a><br/>
+    <a href="/cgi-bin/py-sessions-2.py">Back to Page 2</a>
 </body>
 </html>
 """)
