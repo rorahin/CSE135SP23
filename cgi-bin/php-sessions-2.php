@@ -1,29 +1,30 @@
 <?php
-// Start session
-session_start();
+session_start(); // Start or resume the session
 
-// Check if username is set in session
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
+// Retrieve data from the session
+$name = $_SESSION['username'] ?? null;
+
+// Output HTML
+echo "<html>";
+echo "<head>";
+echo "<title>PHP Sessions</title>";
+echo "</head>";
+echo "<body>";
+
+echo "<h1>PHP Sessions Page 2</h1>";
+
+if ($name){
+  echo "<p><b>Name:</b> $name";
 } else {
-    $username = 'unknown';
+  echo "<p><b>Name:</b> You do not have a name set</p>";
 }
+echo "<br/><br/>";
+echo "<a href=\"/php-sessions-1.php?" . session_name() . "=" . session_id() . "\">Session Page 1</a><br/>";
+echo "<a href=\"/php-cgiform.html?" . session_name() . "=" . session_id() . "\">PHP CGI Form</a><br />";
+echo "<form style=\"margin-top:30px\" action=\"/php-destroy-session.php?" . session_name() . "=" . session_id() . "\" method=\"get\">";
+echo "<button type=\"submit\">Destroy Session</button>";
+echo "</form>";
+
+echo "</body>";
+echo "</html>";
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State Demo 2</title>
-</head>
-
-<body>
-    <h1>State Demo 2</h1>
-    <p>Hello <?php echo $username; ?>!</p>
-    <a href="state-demo.php">Go back</a>
-</body>
-
-</html>
