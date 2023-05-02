@@ -29,5 +29,5 @@ LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
 
 
 document.onload = function () {
-    alert("Hello World!")
+    log("Hello World!")
 };
