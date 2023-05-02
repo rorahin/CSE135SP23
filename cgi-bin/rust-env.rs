@@ -7,7 +7,7 @@ fn main() {
 
     println!("Content-type: text/html\n");
     println!("<html>");
-    println!("<head><title>Hello, World!</title></head>");
+    println!("<head><title>Environment Variables</title></head>");
     println!("<body><h1 align=center>Environment Variables</h1>\
   	<hr/>\n");
     println!("</html>");
