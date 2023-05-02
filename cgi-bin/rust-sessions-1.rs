@@ -51,7 +51,7 @@ fn main() {
     println!("<br /><br />");
 
     // Destroy Cookie button
-    println!("<form action=\"/cgi-bin/c-destroy-session.cgi\" method=\"get\">");
+    println!("<form action=\"/cgi-bin/rust-destroy-session\" method=\"get\">");
     println!("<button type=\"submit\">Destroy Session</button>");
     println!("</form>");
 
