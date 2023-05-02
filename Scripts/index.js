@@ -27,7 +27,6 @@ LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
     subscriptionType: 'pro'
 });
 
-
 document.onload = function () {
     console.log("Hello World!")
 };
