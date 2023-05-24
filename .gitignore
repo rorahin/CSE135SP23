@@ -1,1 +1,45 @@
 goaccess-1.4
+goaccess-1.4/
+goaccess-1.4
+# Ignore node_modules directory
+node_modules/
+
+# Ignore npm-debug.log files
+npm-debug.log*
+
+# Ignore yarn.lock file (if you're using yarn)
+yarn.lock
+
+# Ignore pnpm-lock.yaml file (if you're using pnpm)
+pnpm-lock.yaml
+
+# Ignore package-lock.json file (if you're using npm 5+)
+package-lock.json
+
+# Ignore .pnp.cjs file (if you're using Plug 'n' Play with yarn 2+)
+.pnp.cjs
+
+# Ignore .env files (specifically for environment variables)
+.env
+
+# Ignore any generated or compiled code
+/dist/
+/build/
+/out/
+
+# Ignore logs
+*.log
+
+# Ignore any files or directories you don't want to commit
+# filename.extension
+# directoryname/
+
+# Ignore editor-specific files or directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS-specific files or directories
+.DS_Store
+Thumbs.db
