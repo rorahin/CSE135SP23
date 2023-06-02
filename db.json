@@ -16,7 +16,709 @@
   "profile": {
     "name": "typicode"
   },
-  "static": [],
-  "performance": [],
-  "activity": []
+  "static": [
+    {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.50",
+      "userLanguage": "en-US",
+      "cookiesEnabled": true,
+      "javaScriptEnabled": true,
+      "imagesEnabled": false,
+      "cssEnabled": true,
+      "screenDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "windowDimensions": {
+        "width": 614,
+        "height": 752
+      },
+      "networkConnection": "4g",
+      "id": 1
+    },
+    {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+      "userLanguage": "en-US",
+      "cookiesEnabled": true,
+      "javaScriptEnabled": true,
+      "imagesEnabled": false,
+      "cssEnabled": true,
+      "screenDimensions": {
+        "width": 2560,
+        "height": 1440
+      },
+      "windowDimensions": {
+        "width": 1424,
+        "height": 856
+      },
+      "networkConnection": "4g",
+      "id": 2
+    }
+  ],
+  "performance": [
+    {
+      "timing": {
+        "connectStart": 1685139014353,
+        "navigationStart": 1685139014348,
+        "secureConnectionStart": 0,
+        "fetchStart": 1685139014353,
+        "domContentLoadedEventStart": 1685139014689,
+        "responseStart": 1685139014440,
+        "domInteractive": 1685139014688,
+        "domainLookupEnd": 1685139014353,
+        "responseEnd": 1685139014442,
+        "redirectStart": 0,
+        "requestStart": 1685139014362,
+        "unloadEventEnd": 1685139014455,
+        "unloadEventStart": 1685139014455,
+        "domLoading": 1685139014462,
+        "domComplete": 1685139015273,
+        "domainLookupStart": 1685139014353,
+        "loadEventStart": 1685139015274,
+        "domContentLoadedEventEnd": 1685139014690,
+        "loadEventEnd": 1685139015276,
+        "redirectEnd": 0,
+        "connectEnd": 1685139014353
+      },
+      "startLoading": 1685139014348,
+      "endLoading": 1685139015276,
+      "loadTime": 928,
+      "id": 1
+    },
+    {
+      "timing": {
+        "connectStart": 1685140999011,
+        "navigationStart": 1685140999010,
+        "secureConnectionStart": 0,
+        "fetchStart": 1685140999011,
+        "domContentLoadedEventStart": 1685140999299,
+        "responseStart": 1685140999092,
+        "domInteractive": 1685140999292,
+        "domainLookupEnd": 1685140999011,
+        "responseEnd": 1685140999094,
+        "redirectStart": 0,
+        "requestStart": 1685140999016,
+        "unloadEventEnd": 0,
+        "unloadEventStart": 0,
+        "domLoading": 1685140999097,
+        "domComplete": 1685140999441,
+        "domainLookupStart": 1685140999011,
+        "loadEventStart": 1685140999441,
+        "domContentLoadedEventEnd": 1685140999301,
+        "loadEventEnd": 1685140999446,
+        "redirectEnd": 0,
+        "connectEnd": 1685140999011
+      },
+      "startLoading": 1685140999010,
+      "endLoading": 1685140999446,
+      "loadTime": 436,
+      "id": 2
+    }
+  ],
+  "activity": [
+    {
+      "event": [
+        {
+          "eventType": "pageEnter",
+          "time": 1685139015274
+        },
+        {
+          "eventType": "keydown",
+          "key": "Alt",
+          "time": 1685139015781
+        },
+        {
+          "eventType": "mousemove",
+          "x": 7,
+          "y": 258,
+          "time": 1685139032432
+        },
+        {
+          "eventType": "mousemove",
+          "x": 7,
+          "y": 258,
+          "time": 1685139032434
+        },
+        {
+          "eventType": "mousemove",
+          "x": 553,
+          "y": 218,
+          "time": 1685139440944
+        },
+        {
+          "eventType": "mousemove",
+          "x": 553,
+          "y": 218,
+          "time": 1685139440944
+        },
+        {
+          "eventType": "mousemove",
+          "x": 510,
+          "y": 179,
+          "time": 1685139455639
+        },
+        {
+          "eventType": "mousemove",
+          "x": 466,
+          "y": 133,
+          "time": 1685139455645
+        },
+        {
+          "eventType": "mousemove",
+          "x": 425,
+          "y": 85,
+          "time": 1685139455652
+        },
+        {
+          "eventType": "mousemove",
+          "x": 384,
+          "y": 35,
+          "time": 1685139455659
+        },
+        {
+          "eventType": "mousemove",
+          "x": 287,
+          "y": 35,
+          "time": 1685139456505
+        },
+        {
+          "eventType": "mousemove",
+          "x": 267,
+          "y": 64,
+          "time": 1685139456509
+        },
+        {
+          "eventType": "mousemove",
+          "x": 244,
+          "y": 92,
+          "time": 1685139456518
+        },
+        {
+          "eventType": "mousemove",
+          "x": 218,
+          "y": 116,
+          "time": 1685139456524
+        },
+        {
+          "eventType": "mousemove",
+          "x": 192,
+          "y": 143,
+          "time": 1685139456532
+        },
+        {
+          "eventType": "mousemove",
+          "x": 162,
+          "y": 166,
+          "time": 1685139456538
+        },
+        {
+          "eventType": "mousemove",
+          "x": 132,
+          "y": 190,
+          "time": 1685139456545
+        },
+        {
+          "eventType": "mousemove",
+          "x": 104,
+          "y": 214,
+          "time": 1685139456552
+        },
+        {
+          "eventType": "mousemove",
+          "x": 73,
+          "y": 242,
+          "time": 1685139456558
+        },
+        {
+          "eventType": "mousemove",
+          "x": 45,
+          "y": 272,
+          "time": 1685139456567
+        },
+        {
+          "eventType": "mousemove",
+          "x": 22,
+          "y": 305,
+          "time": 1685139456572
+        },
+        {
+          "eventType": "mousemove",
+          "x": 0,
+          "y": 337,
+          "time": 1685139456580
+        },
+        {
+          "eventType": "mousemove",
+          "x": 204,
+          "y": 375,
+          "time": 1685139814208
+        },
+        {
+          "eventType": "mousemove",
+          "x": 204,
+          "y": 375,
+          "time": 1685139814208
+        },
+        {
+          "eventType": "mousemove",
+          "x": 234,
+          "y": 348,
+          "time": 1685139814209
+        },
+        {
+          "eventType": "mousemove",
+          "x": 265,
+          "y": 321,
+          "time": 1685139814214
+        },
+        {
+          "eventType": "mousemove",
+          "x": 295,
+          "y": 297,
+          "time": 1685139814222
+        },
+        {
+          "eventType": "mousemove",
+          "x": 322,
+          "y": 280,
+          "time": 1685139814238
+        },
+        {
+          "eventType": "mousemove",
+          "x": 348,
+          "y": 268,
+          "time": 1685139814242
+        },
+        {
+          "eventType": "mousemove",
+          "x": 374,
+          "y": 259,
+          "time": 1685139814247
+        },
+        {
+          "eventType": "mousemove",
+          "x": 394,
+          "y": 252,
+          "time": 1685139814252
+        },
+        {
+          "eventType": "mousemove",
+          "x": 410,
+          "y": 248,
+          "time": 1685139814257
+        },
+        {
+          "eventType": "mousemove",
+          "x": 423,
+          "y": 247,
+          "time": 1685139814264
+        },
+        {
+          "eventType": "mousemove",
+          "x": 432,
+          "y": 248,
+          "time": 1685139814270
+        },
+        {
+          "eventType": "mousemove",
+          "x": 441,
+          "y": 249,
+          "time": 1685139814281
+        },
+        {
+          "eventType": "mousemove",
+          "x": 458,
+          "y": 263,
+          "time": 1685139814336
+        },
+        {
+          "eventType": "mousemove",
+          "x": 482,
+          "y": 263,
+          "time": 1685139814587
+        },
+        {
+          "eventType": "mousemove",
+          "x": 515,
+          "y": 259,
+          "time": 1685139814593
+        },
+        {
+          "eventType": "mousemove",
+          "x": 546,
+          "y": 254,
+          "time": 1685139814601
+        },
+        {
+          "eventType": "mousemove",
+          "x": 574,
+          "y": 244,
+          "time": 1685139814607
+        },
+        {
+          "eventType": "mousemove",
+          "x": 603,
+          "y": 237,
+          "time": 1685139814614
+        },
+        {
+          "eventType": "mousemove",
+          "x": 1257,
+          "y": 15,
+          "time": 1685139816040
+        },
+        {
+          "eventType": "mousemove",
+          "x": 672,
+          "y": 438,
+          "time": 1685139905341
+        },
+        {
+          "eventType": "mousemove",
+          "x": 480,
+          "y": 444,
+          "time": 1685139905543
+        },
+        {
+          "eventType": "mousemove",
+          "x": 263,
+          "y": 467,
+          "time": 1685139905555
+        },
+        {
+          "eventType": "mousemove",
+          "x": 135,
+          "y": 471,
+          "time": 1685139905565
+        },
+        {
+          "eventType": "mousemove",
+          "x": 7,
+          "y": 467,
+          "time": 1685139905574
+        },
+        {
+          "eventType": "mousemove",
+          "x": 1,
+          "y": 468,
+          "time": 1685141210177
+        },
+        {
+          "eventType": "mousemove",
+          "x": 12,
+          "y": 407,
+          "time": 1685141210186
+        },
+        {
+          "eventType": "mousemove",
+          "x": 24,
+          "y": 339,
+          "time": 1685141210194
+        },
+        {
+          "eventType": "mousemove",
+          "x": 34,
+          "y": 269,
+          "time": 1685141210205
+        },
+        {
+          "eventType": "mousemove",
+          "x": 49,
+          "y": 127,
+          "time": 1685141210216
+        },
+        {
+          "eventType": "mousemove",
+          "x": 51,
+          "y": 2,
+          "time": 1685141210227
+        },
+        {
+          "eventType": "mousemove",
+          "x": 28,
+          "y": 17,
+          "time": 1685141210480
+        },
+        {
+          "eventType": "mousemove",
+          "x": 25,
+          "y": 53,
+          "time": 1685141210486
+        },
+        {
+          "eventType": "mousemove",
+          "x": 23,
+          "y": 85,
+          "time": 1685141210494
+        },
+        {
+          "eventType": "mousemove",
+          "x": 21,
+          "y": 118,
+          "time": 1685141210505
+        },
+        {
+          "eventType": "mousemove",
+          "x": 24,
+          "y": 169,
+          "time": 1685141210516
+        },
+        {
+          "eventType": "mousemove",
+          "x": 26,
+          "y": 185,
+          "time": 1685141210527
+        },
+        {
+          "eventType": "mousemove",
+          "x": 32,
+          "y": 205,
+          "time": 1685141210538
+        },
+        {
+          "eventType": "mousemove",
+          "x": 44,
+          "y": 218,
+          "time": 1685141210550
+        },
+        {
+          "eventType": "mousemove",
+          "x": 55,
+          "y": 222,
+          "time": 1685141210560
+        },
+        {
+          "eventType": "mousemove",
+          "x": 87,
+          "y": 228,
+          "time": 1685141210572
+        },
+        {
+          "eventType": "mousemove",
+          "x": 104,
+          "y": 230,
+          "time": 1685141210583
+        },
+        {
+          "eventType": "mousemove",
+          "x": 122,
+          "y": 231,
+          "time": 1685141210594
+        },
+        {
+          "eventType": "mousemove",
+          "x": 126,
+          "y": 231,
+          "time": 1685141210605
+        },
+        {
+          "eventType": "mousemove",
+          "x": 98,
+          "y": 276,
+          "time": 1685141210803
+        },
+        {
+          "eventType": "mousemove",
+          "x": 61,
+          "y": 327,
+          "time": 1685141210810
+        },
+        {
+          "eventType": "mousemove",
+          "x": 26,
+          "y": 370,
+          "time": 1685141210819
+        },
+        {
+          "eventType": "mousemove",
+          "x": 8,
+          "y": 570,
+          "time": 1685141705853
+        }
+      ],
+      "currentPage": "http://greyluo.online/",
+      "id": 1
+    },
+    {
+      "event": [
+        {
+          "eventType": "pageEnter",
+          "time": 1685140999441
+        },
+        {
+          "eventType": "mousemove",
+          "x": 812,
+          "y": 200,
+          "time": 1685141000569
+        },
+        {
+          "eventType": "mousemove",
+          "x": 810,
+          "y": 200,
+          "time": 1685141000582
+        },
+        {
+          "eventType": "mousemove",
+          "x": 794,
+          "y": 209,
+          "time": 1685141000626
+        },
+        {
+          "eventType": "mousemove",
+          "x": 708,
+          "y": 267,
+          "time": 1685141000651
+        },
+        {
+          "eventType": "mousemove",
+          "x": 500,
+          "y": 412,
+          "time": 1685141000685
+        },
+        {
+          "eventType": "mousemove",
+          "x": 402,
+          "y": 437,
+          "time": 1685141000718
+        },
+        {
+          "eventType": "mousemove",
+          "x": 363,
+          "y": 441,
+          "time": 1685141000753
+        },
+        {
+          "eventType": "mousemove",
+          "x": 355,
+          "y": 445,
+          "time": 1685141000786
+        },
+        {
+          "eventType": "mousemove",
+          "x": 354,
+          "y": 446,
+          "time": 1685141000818
+        },
+        {
+          "eventType": "mousemove",
+          "x": 354,
+          "y": 446,
+          "time": 1685141000854
+        },
+        {
+          "eventType": "mousemove",
+          "x": 356,
+          "y": 444,
+          "time": 1685141000885
+        },
+        {
+          "eventType": "mousemove",
+          "x": 374,
+          "y": 432,
+          "time": 1685141000919
+        },
+        {
+          "eventType": "mousemove",
+          "x": 394,
+          "y": 406,
+          "time": 1685141000951
+        },
+        {
+          "eventType": "mousemove",
+          "x": 442,
+          "y": 339,
+          "time": 1685141000983
+        },
+        {
+          "eventType": "mousemove",
+          "x": 518,
+          "y": 166,
+          "time": 1685141001026
+        },
+        {
+          "eventType": "mousemove",
+          "x": 529,
+          "y": 104,
+          "time": 1685141001052
+        },
+        {
+          "eventType": "mousemove",
+          "x": 525,
+          "y": 75,
+          "time": 1685141001085
+        },
+        {
+          "eventType": "mousemove",
+          "x": 515,
+          "y": 60,
+          "time": 1685141001118
+        },
+        {
+          "eventType": "mousemove",
+          "x": 505,
+          "y": 37,
+          "time": 1685141001152
+        },
+        {
+          "eventType": "mousemove",
+          "x": 501,
+          "y": 23,
+          "time": 1685141001186
+        },
+        {
+          "eventType": "mousemove",
+          "x": 499,
+          "y": 18,
+          "time": 1685141001218
+        },
+        {
+          "eventType": "mousemove",
+          "x": 498,
+          "y": 15,
+          "time": 1685141001254
+        },
+        {
+          "eventType": "mousemove",
+          "x": 497,
+          "y": 15,
+          "time": 1685141001287
+        },
+        {
+          "eventType": "mousemove",
+          "x": 492,
+          "y": 11,
+          "time": 1685141001319
+        },
+        {
+          "eventType": "mousemove",
+          "x": 488,
+          "y": 9,
+          "time": 1685141001349
+        },
+        {
+          "eventType": "mousemove",
+          "x": 476,
+          "y": 6,
+          "time": 1685141001390
+        },
+        {
+          "eventType": "mousemove",
+          "x": 464,
+          "y": 2,
+          "time": 1685141001415
+        },
+        {
+          "eventType": "mousemove",
+          "x": 457,
+          "y": 0,
+          "time": 1685141001448
+        },
+        {
+          "eventType": "pageLeave",
+          "time": 1685141005092
+        }
+      ],
+      "currentPage": "https://greyluo.online/",
+      "id": 2
+    }
+  ]
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Static</title>
+  <!--Script Reference[1]-->
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
+</head>
+
+<body>
+  <!--Grid Component Placement[2]-->
+  <zing-grid caption="Initial Browser Data" layout-controls>
+    <zg-data src="https://greyluo.online/api/static">
+    </zg-data>
+  </zing-grid>
+</body>
+
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBase</title>
+    <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+</head>
+
+<body>
+    <zing-grid caption="Browser Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row"
+        layout-controls src="http://greyluo.online/db.json">
+
+        <zg-caption>
+            <a href="" slot="caption">Browser Data</a>
+        </zg-caption>
+        <zg-colgroup>
+            <zg-column index="id" header="ID"></zg-column>
+            <zg-column index="userAgent" header="User Agent"></zg-column>
+            <zg-column index="userLanguage" header="Language"></zg-column>
+            <zg-column index="cookiesEnabled" header="Cookies Enabled"></zg-column>
+            <zg-column index="javaScriptEnabled" header="JavaScript Enabled"></zg-column>
+            <zg-column index="imagesEnabled" header="Images Enabled"></zg-column>
+            <zg-column index="cssEnabled" header="CSS Enabled"></zg-column>
+            <zg-column index="screenDimensions.width" header="Screen Width"></zg-column>
+            <zg-column index="screenDimensions.height" header="Screen Height"></zg-column>
+            <zg-column index="windowDimensions.width" header="Window Width"></zg-column>
+            <zg-column index="windowDimensions.height" header="Window Height"></zg-column>
+            <zg-column index="networkConnection" header="Network Connection"></zg-column>
+        </zg-colgroup>
+    </zing-grid>
+</body>
+
+</html>
+-->

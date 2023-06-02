@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ZingGrid: Blank Grid</title>
+  <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .chart--container {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+    .chart-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+    margin: 0;
+  }
+  .zingchart-tooltip {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .chart-legend-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .chart-legend-item {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- CHART CONTAINER -->
+  <div id="chartContainer">
+    <div id="screenResChart" class="chart"></div>
+    <div id="jsEnabledChart" class="chart"></div>
+    <div id="networkConnChart" class="chart"></div>
+    <a class="zc-ref" href="https://www.zingchart.com">Powered by ZingChart</a>
+  </div>
+
+  <div id="myChart" class="chart--container">
+    <a class="zc-ref" href="https://www.zingchart.com">Powered by ZingChart</a>
+
+  </div>
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window:load event for Javascript to run after HTML
+    // because this Javascript is injected into the document head
+    window.addEventListener('load', () => {
+      // Javascript code to execute after DOM content
+      // full ZingChart schema can be found here:
+      // https://www.zingchart.com/docs/api/json-configuration/
+      Promise.all([fetch('https://greyluo.online/api/static'),fetch('https://greyluo.online/api/performance')])
+      .then(responses => Promise.all(responses.map(response => response.json())))
+        .then(([data1,data2]) => {
+
+          const startLoadingValues = data2.map(item => item.startLoading);
+/*           const minStartValue = Math.min(...startLoadingValues);
+          const startDifferences = startLoadingValues.map(value => value - minStartValue); */
+          const endLoadingValues = data2.map(item => item.endLoading + 300000000000);
+        /*   const minEndValue = Math.min(...endLoadingValues);
+          const endDifferences = endLoadingValues.map(value => value - minEndValue +1000000); //adjusted for visualizataon */
+
+          const loadTimeValues = data2.map(item => item.loadTime);
+          // Create a frequency count of different screen resolutions
+          const screenDimensionsCount = data1.reduce((acc, item) => {
+            const res = `${item.screenWidth}x${item.screenHeight}`;
+            if (!acc[res]) {
+              acc[res] = 0;
+            }
+            acc[res]++;
+            return acc;
+          }, {});
+
+          // Create a frequency count of network connections
+          const networkConnectionCount = data1.reduce((acc, item) => {
+            if (!acc[item.networkConnection]) {
+              acc[item.networkConnection] = 0;
+            }
+            acc[item.networkConnection]++;
+            return acc;
+          }, {});
+          console.log(networkConnectionCount)
+
+
+          // Count number of users with JavaScript enabled and disabled
+          const javaScriptEnabledCount = data1.reduce((acc, item) => {
+            const status = item.javaScriptEnabled ? 'Enabled' : 'Disabled';
+            if (!acc[status]) {
+              acc[status] = 0;
+            }
+            acc[status]++;
+            return acc;
+          }, {});
+          console.log(javaScriptEnabledCount);
+          let myDashboard = {
+        /* Graphset array */
+        graphset: [
+          {
+            type: 'line',
+            height: '200px',
+            width: '100%',
+            x: '5%',
+            y: '5%',
+            title: {
+              text: "Loading Time (Start Loading, Adjusted End Loading, Loading Duration in ms)"
+            },
+            'scale-x': {
+              labels: data2.map(item => item.id)
+            },
+            series: [
+              { values: startLoadingValues, text: 'Start Loading'},
+              { values: endLoadingValues, text: 'End Loading'},
+              { values: loadTimeValues, text: 'Load Time' }
+            ],
+
+          },
+
+
+          {
+            /* Object containing chart data */
+            type: 'bar',
+            height: '55%',
+            width: '50%',
+            title: {
+              text: "Counts of Different Screen Dimensions  "
+            },
+            x: '5%',
+            y: '200px',
+            'scale-x': {
+                labels: Object.keys(screenDimensionsCount)
+              },
+              series: [{
+                values: Object.values(screenDimensionsCount)
+              }]
+          },
+          {
+            type: 'pie',
+            title: {
+              text: "Percentage of Users Enabling JS"
+            },
+            height: '55%',
+            width: '50%',
+            x: '50%',
+            y: '200px',
+            series: Object.entries(javaScriptEnabledCount).map(([label, value]) => ({ text: label, values: [value] }))
+          }
+        ]
+      };
+
+          // Now generate the charts using ZingChart
+          zingchart.render({
+        id: 'myChart',
+        data: myDashboard,
+        height: '100%',
+        width: '100%',
+      });
+    });
+          // Bar chart for screen resolution distribution
+
+
+    });
+  </script>
+</body>
+
+</html>
