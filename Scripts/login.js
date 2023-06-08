@@ -2,9 +2,9 @@
 
 document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-    fetch('/api/login', {
+    let username = event.target.username.value;
+    let password = event.target.password.value;
+    fetch('/login', {   // Check the route!!!!!!!!!!!
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -13,6 +13,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
     })
         .then(response => response.json())
         .then(data => {
+
             if (data.token) {
                 localStorage.setItem('token', data.token);
                 location.href = './Dashboard/index.html';  // after login

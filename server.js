@@ -24,10 +24,12 @@ server.listen(3001); //3001 means it's on /fapi.
 
 const express = require('express');
 const mysql = require('mysql2/promise');
+const userRoute =require('./user')
 
 const app = express();
 
 app.use(express.json()); // middleware for parsing JSON data
+app.use("/users", userRoute)
 
 const pool = mysql.createPool({
   host: '127.0.0.1',
@@ -124,31 +126,46 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 // Signup route
-app.post('/Signup', async (req, res) => {
+app.post('/signup', async (req, res) => {
   const { username, password, role } = req.body;
 
   // Password hashing
-  const hashedPass = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-  // storing user details in the database
-  pool.query(
-    'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-    [username, hashedPassword, role],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        res.status(500).send('Server error');
-      } else {
-        res.status(201).send('User created');
-      }
+  try {
+    // Check if the username already exists
+    const [existingUser] = await pool.query(
+      'SELECT * FROM users WHERE username = ?',
+      [username]
+    );
+
+    if (existingUser.length > 0) {
+      // Username already exists
+      res.status(409).json({ success: false, message: 'Username already exists' });
+    } else {
+      // Store user details in the database
+      await pool.query(
+        'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+        [username, hashedPassword, role]
+      );
+      res.status(201).json({ success: true, message: 'User created' });
     }
-  )
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
+
+// Use the json-server router for other routes
+var router = jsonServer.router('db.json');
+server.use(router);
+
 
 // Login route
 // const jwtSecret = "secretKey";
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 

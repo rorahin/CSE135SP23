@@ -24,27 +24,21 @@
     <link rel="icon" type="image/x-icon" href="favicon/icons8-futurama-fry-120.png">
     <link rel="stylesheet" href="Styles/style.css" type="text/css" media="all" />
     <script defer src='./Scripts/index.js'></script>
-    <title>User Management</title>
+    <title>Login Page</title>
 </head>
 
 <body>
-    <h1>User Management!</h1>
-    <!-- Put your users here -->
-    <button id='logout-btn'>Logout</button>
-    <script src="./dashboard.js"></script>
-    <script>
-        var jwt = localStorage.getItem('token');
-        if (!jwt) {
-            location.href = '../login.html';
-        } else {
-            var payload = JSON.parse(atob(jwt.split(".")[1]));
-            if (payload.role !== 'admin') {
-                location.href = './index.html';
-            }
-        }
+    <form id="signupForm">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" placeholder='Username' required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" placeholder='Password' required><br>
+        <label for="role">Role:</label><br>
+        <input type="text" id="role" name="role" placeholder='Role' required><br>
+        <input type="submit" value="Sign Up">
+    </form>
+    <script src="./Scripts/signup.js"></script>
 
-        // code for management goes here please check later
-    </script>
 </body>
 
 </html>
