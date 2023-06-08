@@ -27,7 +27,7 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); // middleware for parsing JSON data
 
 const pool = mysql.createPool({
   host: '127.0.0.1',
@@ -112,8 +112,71 @@ app.get('/performance', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+
+
+
+// HW4 part 0: (Rudy)
+// Authentication
+// Bcrypt --> password only
+// JSON Web token --> login credential authentication
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+// Signup route
+app.post('/Signup', async (req, res) => {
+  const { username, password, role } = req.body;
+
+  // Password hashing
+  const hashedPass = await bcrypt.hash(password, 10);
+
+  // storing user details in the database
+  pool.query(
+    'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+    [username, hashedPassword, role],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send('Server error');
+      } else {
+        res.status(201).send('User created');
+      }
+    }
+  )
+});
+
+// Login route
+// const jwtSecret = "secretKey";
+require('dotenv').config();
+const jwtSecret = process.env.JWT_SECRET;
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Verifing credentials and return JWT
+  pool.query(
+    'SELECT * FROM users WHERE username = ?',
+    username,
+    async (error, results) => {
+      if (error || results.length === 0) {
+        res.status(401).send('Invalid credentials');
+      } else {
+        const user = results[0];
+
+        // Check password
+        if (await bcrypt.compare(password, user.password)) {
+          // Create JWT
+          const token = jwt.sign({ sub: user.id, role: user.role }, jwtSecret);
+          res.status(200).json({ token });
+        } else {
+          res.status(401).send('Invalid credentials');
+        }
+      }
+    }
+  )
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-

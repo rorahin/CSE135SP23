@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Created by rudy for HW4 part0 -->
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCRCZTGB6Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag () { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-JCRCZTGB6Y');
+    </script>
+
+    <!-- LogRocket scripts -->
+    <script src="https://cdn.lr-ingest.com/LogRocket.min.js" crossorigin="anonymous"></script>
+    <script>window.LogRocket && window.LogRocket.init('z0mszh/cse135sp23');</script>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon/icons8-futurama-fry-120.png">
+    <link rel="stylesheet" href="Styles/style.css" type="text/css" media="all" />
+    <script defer src='./Scripts/index.js'></script>
+    <title>Logout Page</title>
+</head>
+
+<body>
+    <h1>logged out successfuy</h1>
+    <script>
+        localStorage.removeItem('token');
+        location.href = '/login.html';  // after logout
+    </script>
+</body>
+
+</html>
