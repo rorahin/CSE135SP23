@@ -5,11 +5,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
-        #user-table .username-cell {
+        #user-table .password-cell {
             max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            overflow-x: scroll
+
         }
     </style>
 </head>
@@ -25,7 +24,8 @@
         <table id="user-table" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Username</th>
+                    <th>Username/Email</th>
+                    <th>Password</th>
                     <th>Role</th>
                     <th>Actions</th>
                 </tr>
@@ -82,8 +82,9 @@
             // Handle click event for the update buttons
             $(document).on('click', '.update-btn', function() {
                 const username = $(this).data('username');
-                const newPassword = prompt('Enter new password for user');
-                const newRole = confirm('Should user be an admin?');
+                const newPassword = prompt('Enter new password for user(empty for no change)');
+                const roleResponse = prompt('Should user be an admin? (yes/no)');
+                const newRole = roleResponse.toLowerCase() === 'yes';
                 fetch(`/api/users/${username}`, {
                     method: 'PUT',
                     headers: {

@@ -35,10 +35,15 @@ router.post("/", async (req, res) => {
 // Update a user
 router.put("/:username", async (req, res) => {
     const username = req.params.username;
-    const {  password, role } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const { password, role } = req.body;
     try {
-        const [result] = await pool.execute('UPDATE users SET password = ?, role = ? WHERE username = ?', [hashedPassword, role, username]);
+        // Only update password if it's provided and not equal to '0'
+        if (password && password !== '') {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const [result] = await pool.execute('UPDATE users SET password = ?, role = ? WHERE username = ?', [hashedPassword, role, username]);
+        } else {
+            const [result] = await pool.execute('UPDATE users SET role = ? WHERE username = ?', [role, username]);
+        }
         res.send('User updated successfully');
     } catch (err) {
         console.log(err);
