@@ -15,8 +15,9 @@
 <body>
     <div class="container">
         <h1>User Management</h1>
+        <button class="logout">Logout</button>
         <form id="user-form">
-            <input type="text" id="username" placeholder="Username" required>
+            <input type="text" id="username" placeholder="Username/Email" required>
             <input type="password" id="password" placeholder="Password" required>
             <input type="checkbox" id="role"> Admin
             <button type="submit">Add User</button>
@@ -36,10 +37,25 @@
     </div>
 
     <script>
+        const token = localStorage.getItem("token")
         $(document).ready(function() {
             // Fetch all users and display them in the table
-            fetch('/api/users')
-                .then(response => response.json())
+            fetch('/api/users',{
+                    headers: {
+                        'authorization': token
+                    }
+                })
+                .then(response => {
+                    if (response.status===401){
+                        document.body.innerHTML = '';
+                        alert('Not admin: Access Denied');
+                    }
+                    if (response.ok){
+                        return response.json()
+
+                    }
+
+                })
                 .then(users => {
                     users.forEach(user => {
                         $('#user-table tbody').append(`
@@ -65,7 +81,8 @@
                 fetch('/api/users', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'authorization': token
                     },
                     body: JSON.stringify({ username, password, role })
                 })
@@ -79,6 +96,14 @@
                 });
             });
 
+            $(document).on('click', '.logout', function() {
+                // remove the token from wherever you have stored it
+
+                localStorage.removeItem('token');
+                // redirect to the login page
+                window.location.href = '/login.html'; // replace '/login.html' with the path of your login page
+            });
+
             // Handle click event for the update buttons
             $(document).on('click', '.update-btn', function() {
                 const username = $(this).data('username');
@@ -88,7 +113,8 @@
                 fetch(`/api/users/${username}`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'authorization': token
                     },
                     body: JSON.stringify({ password: newPassword, role: newRole })
                 })
@@ -108,7 +134,11 @@
                 const confirmDelete = confirm('Are you sure you want to delete this user?');
                 if (confirmDelete) {
                     fetch(`/api/users/${username}`, {
-                        method: 'DELETE'
+                        method: 'DELETE',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': token
+                        },
                     })
                     .then(response => {
                         if (response.ok) {

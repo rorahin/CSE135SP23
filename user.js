@@ -2,6 +2,32 @@ const bcrypt = require('bcryptjs');
 const express=require('express')
 const mysql = require('mysql2/promise');
 const router = express.Router()
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const jwtSecret = process.env.JWT_SECRET;
+
+function verifyAdminRole(req, res, next) {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+      return res.status(403).send('A token is required for authentication');
+    }
+
+    try {
+      const decoded = jwt.verify(token, jwtSecret);
+      if (!decoded.role) {
+        return res.status(401).send('Unauthorized: Invalid role');
+      }
+
+      // If user is admin, add the decoded token to the request and continue to the next middleware
+      req.user = decoded;
+      next();
+    } catch (err) {
+      return res.status(401).send('Invalid Token');
+    }
+  }
+
+router.use(verifyAdminRole);
 
 const pool = mysql.createPool({
     host: '127.0.0.1',
@@ -9,6 +35,7 @@ const pool = mysql.createPool({
     password: 'Luo12345',
     database: 'cse135'
   });
+
 
 router.get("/",async (req,res)=>{
     try {

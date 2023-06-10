@@ -3,14 +3,14 @@ document.getElementById('signupForm').addEventListener('submit', function (event
     const username = event.target.username.value;
     const password = event.target.password.value;
     const role = event.target.role.value;
-    fetch('/signup', {
+    fetch('/api/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password, role }),
     })
-        .then(response => response.json())
+        .then(response => response.json({ status: 'ok' }))
         .then(data => {
             if (data.success) {
                 location.href = '/login.html';

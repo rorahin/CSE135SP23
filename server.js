@@ -1,30 +1,30 @@
 // server.js file
 
-var jsonServer = require('json-server');
+var jsonServer = require('json-server'); //&&&&&&&&&&&&&&&&
 
 // Returns an Express server
-var server = jsonServer.create();
+var server = jsonServer.create(); //&&&&&&&&&&&&&&&&
 
 // Set default middlewares (logger, static, cors and no-cache)
-server.use(jsonServer.defaults());
+server.use(jsonServer.defaults()); //&&&&&&&&&&&&&&&&
 
 // Add custom routes
 // server.get('/custom', function (req, res) { res.json({ msg: 'hello' }) })
-server.put('/a', function (req, res) { res.json({ msg: 'hello' }) })
+// server.put('/a', function (req, res) { res.json({ msg: 'hello' }) }) //&&&&&&&&&&&&&&&&
 
 // Returns an Express router
 var router = jsonServer.router('db.json');
 
 server.use(router);
 
-server.listen(3001); //3001 means it's on /fapi.
+// server.listen(3001); //3001 means it's on /fapi.
 
 
 //actual endpoints
 
 const express = require('express');
 const mysql = require('mysql2/promise');
-const userRoute =require('./user')
+const userRoute = require('./user')
 
 const app = express();
 
@@ -50,6 +50,10 @@ const port = 3000;
   res.json(response);
 });
  */
+
+const cors = require('cors');
+app.use(cors());
+
 app.post('/static', (req, res) => {
   const data = req.body;
   // Insert the data into the 'static' table
@@ -157,39 +161,44 @@ app.post('/signup', async (req, res) => {
 });
 
 // Use the json-server router for other routes
-var router = jsonServer.router('db.json');
-server.use(router);
+// var router = jsonServer.router('db.json'); //&&&&&&&&&&&&&&&&
+// server.use(router); //&&&&&&&&&&&&&&&&
 
 
 // Login route
-// const jwtSecret = "secretKey";
+
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
-
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  // Verifing credentials and return JWT
-  pool.query(
-    'SELECT * FROM users WHERE username = ?',
-    username,
-    async (error, results) => {
-      if (error || results.length === 0) {
-        res.status(401).send('Invalid credentials');
-      } else {
-        const user = results[0];
+  try {
+    const [results] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
-        // Check password
-        if (await bcrypt.compare(password, user.password)) {
-          // Create JWT
-          const token = jwt.sign({ sub: user.id, role: user.role }, jwtSecret);
-          res.status(200).json({ token });
-        } else {
-          res.status(401).send('Invalid credentials');
-        }
-      }
+    // Check if user exists
+    if (results.length === 0) {
+      return res.status(401).send('Invalid credentials');
     }
-  )
+
+    const user = results[0];
+
+    // Check password
+    if (await bcrypt.compare(password, user.password)) {
+      // Create JWT
+      const token = jwt.sign({ sub: user.id, role: user.role }, jwtSecret, {
+        expiresIn: '1h' // set the token to expire in an hour
+      });
+
+      res.status(200).json({ token, role: user.role }); // **********
+    } else {
+      res.status(401).send('Invalid credentials');
+    }
+  } catch (error) {
+    alert("Rudy")
+    console.log("Rudy")
+    console.log(error); // Log the error
+    res.status(500).send('Server error');
+  }
 });
 
 

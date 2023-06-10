@@ -21,17 +21,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../favicon/icons8-futurama-fry-120.png">
-    <link rel="stylesheet" href="../Styles/style.css" type="text/css" media="all" />
-    <script defer src='../Scripts/index.js'></script>
-    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="favicon/icons8-futurama-fry-120.png">
+    <link rel="stylesheet" href="Styles/style.css" type="text/css" media="all" />
+    <script defer src='./Scripts/index.js'></script>
+    <title>User Management</title>
 </head>
 
 <body>
-    <h1>Welcome to the dashboard!</h1>
+    <h1>User Management!</h1>
+    <!-- Put your users here -->
     <button id='logout-btn'>Logout</button>
-    <button id='generate-report'>Generate Report</button>
     <script src="./dashboard.js"></script>
+    <script>
+        var jwt = localStorage.getItem('token');
+        if (!jwt) {
+            location.href = '../login.html';
+        } else {
+            var payload = JSON.parse(atob(jwt.split(".")[1]));
+            if (payload.role !== 'admin') {
+                location.href = './index.html';
+            }
+        }
+
+        // code for management goes here please check later
+    </script>
 </body>
 
 </html>
