@@ -24,6 +24,8 @@
     <link rel="icon" type="image/x-icon" href="../favicon/icons8-futurama-fry-120.png">
     <link rel="stylesheet" href="../Styles/style.css" type="text/css" media="all" />
     <script defer src='../Scripts/index.js'></script>
+    <script src="./dashboard.js"></script>
+
     <title>Dashboard</title>
 </head>
 
@@ -31,7 +33,226 @@
     <h1>Welcome to the dashboard!</h1>
     <button id='logout-btn'>Logout</button>
     <button id='generate-report'>Generate Report</button>
-    <script src="./dashboard.js"></script>
-</body>
+
+
+
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .chart--container {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+    .chart-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+    margin: 0;
+  }
+  .zingchart-tooltip {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .chart-legend-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .chart-legend-item {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- CHART CONTAINER -->
+
+
+  <div id="chartContainer">
+    <div id="screenResChart" class="chart"></div>
+    <div id="jsEnabledChart" class="chart"></div>
+    <div id="networkConnChart" class="chart"></div>
+    <a class="zc-ref" href="https://www.zingchart.com">Powered by ZingChart</a>
+  </div>
+
+
+  <div id="myChart" class="chart--container">
+    <a class="zc-ref" href="https://www.zingchart.com">Powered by ZingChart</a>
+
+  </div>
+
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window:load event for Javascript to run after HTML
+    // because this Javascript is injected into the document head
+    window.addEventListener('load', () => {
+        document.getElementById('logout-btn').addEventListener('click', function () {
+        localStorage.removeItem('token');
+        alert("byeeee")
+        location.href = '../login.html'; // check the route ............................
+    });
+
+      document.getElementById('generate-report').addEventListener('click', function () {
+          location.href = '../metricname.html'; // check the route ............................
+      });
+      document.getElementById('user-management') && document.getElementById('user-management').addEventListener('click', function () {
+      location.href = './users.html'; // check the route ............................
+      });
+
+
+
+      // Javascript code to execute after DOM content
+      // full ZingChart schema can be found here:
+      // https://www.zingchart.com/docs/api/json-configuration/
+      Promise.all([fetch('https://greyluo.online/api/static'),fetch('https://greyluo.online/api/performance')])
+      .then(responses => Promise.all(responses.map(response => response.json())))
+        .then(([data1,data2]) => {
+
+          const startLoadingValues = data2.map(item => item.startLoading);
+/*           const minStartValue = Math.min(...startLoadingValues);
+          const startDifferences = startLoadingValues.map(value => value - minStartValue); */
+          const endLoadingValues = data2.map(item => item.endLoading + 300000000000);
+        /*   const minEndValue = Math.min(...endLoadingValues);
+          const endDifferences = endLoadingValues.map(value => value - minEndValue +1000000); //adjusted for visualizataon */
+
+          const loadTimeValues = data2.map(item => item.loadTime);
+          // Create a frequency count of different screen resolutions
+          const screenDimensionsCount = data1.reduce((acc, item) => {
+            const res = `${item.screenWidth}x${item.screenHeight}`;
+            if (!acc[res]) {
+              acc[res] = 0;
+            }
+            acc[res]++;
+            return acc;
+          }, {});
+
+          // Create a frequency count of network connections
+          const networkConnectionCount = data1.reduce((acc, item) => {
+            if (!acc[item.networkConnection]) {
+              acc[item.networkConnection] = 0;
+            }
+            acc[item.networkConnection]++;
+            return acc;
+          }, {});
+          console.log(networkConnectionCount)
+
+
+          // Count number of users with JavaScript enabled and disabled
+          let englishCounter = 0;
+          let nonEnglishCounter = 0;
+          data1.forEach(item => {
+            const userLanguage = item.userLanguage;
+            // Perform actions based on the userLanguage value
+            if (userLanguage === 'en-US') {
+                console.log('English (US) language');
+                englishCounter++;
+                // Perform additional actions for English (US)
+            } else {
+                console.log('Not English');
+                // Perform actions for other languages
+                nonEnglishCounter++;
+            }
+        });
+
+
+
+          let myDashboard = {
+        /* Graphset array */
+        graphset: [
+
+
+          {
+            /* Object containing chart data */
+            type: 'bar',
+            height: '55%',
+            width: '50%',
+            title: {
+              text: "Counts of Different Screen Dimensions  "
+            },
+            x: '2%',
+            y: '350px',
+            'scale-x': {
+                labels: Object.keys(screenDimensionsCount),
+                text: "English"
+              },
+              series: [{
+                values: Object.values(screenDimensionsCount),
+                text: "Other"
+              }]
+          },
+          {
+            type: 'pie',
+            title: {
+              text: "Browser Languages"
+            },
+            height: '55%',
+            width: '50%',
+            x: '50%',
+            y: '350px',
+
+            series: [{
+                values: [englishCounter]
+                },
+                {
+                values: [nonEnglishCounter]
+                },
+            ]
+          }
+        ]
+      };
+
+          // Now generate the charts using ZingChart
+          zingchart.render({
+        id: 'myChart',
+        data: myDashboard,
+        height: '100%',
+        width: '100%',
+      });
+    });
+          // Bar chart for screen resolution distribution
+
+
+    });
+  </script>
+
+
+
+
+    </body>
 
 </html>

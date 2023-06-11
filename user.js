@@ -36,7 +36,6 @@ const pool = mysql.createPool({
     database: 'cse135'
   });
 
-
 router.get("/",async (req,res)=>{
     try {
         const [rows, fields] = await pool.execute('SELECT * FROM users');

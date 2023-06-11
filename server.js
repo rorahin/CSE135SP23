@@ -169,6 +169,23 @@ app.post('/signup', async (req, res) => {
 
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
+app.get('/role', async (req, res) => {
+
+  const token = req.headers['authorization'];
+
+
+    if (!token) {
+      return res.status(403).send('A token is required for authentication');
+    }
+
+    try {
+      const decoded = jwt.verify(token, jwtSecret);
+      res.status(200).json({role:decoded.role})
+    } catch (err) {
+      return res.status(401).send('Invalid Token');
+    }
+})
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -194,8 +211,6 @@ app.post('/login', async (req, res) => {
       res.status(401).send('Invalid credentials');
     }
   } catch (error) {
-    alert("Rudy")
-    console.log("Rudy")
     console.log(error); // Log the error
     res.status(500).send('Server error');
   }

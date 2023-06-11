@@ -4,6 +4,11 @@ goaccess-1.4
 # Ignore node_modules directory
 node_modules/
 
+# Ignore zingchart directory
+zingchart
+zingchart/
+zingchart
+
 # Ignore npm-debug.log files
 npm-debug.log*
 
