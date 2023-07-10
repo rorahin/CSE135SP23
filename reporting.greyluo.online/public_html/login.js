@@ -4,7 +4,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
     event.preventDefault();
     let username = event.target.username.value;
     let password = event.target.password.value;
-    fetch('/api/login', {
+    fetch('https://greyluo.online/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
                 console.log(data);
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('role', data.role);
-                location.href = './Dashboard/index.html';  // after login user
+                location.href = './index.html';  // after login user
             } else {
                 alert('Invalid username or password');
             }

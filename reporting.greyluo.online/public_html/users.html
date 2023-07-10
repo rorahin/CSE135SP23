@@ -40,7 +40,7 @@
         const token = localStorage.getItem("token")
         $(document).ready(function() {
             // Fetch all users and display them in the table
-            fetch('/api/users',{
+            fetch('https://greyluo.online/api/users',{
                     headers: {
                         'authorization': token
                     }
@@ -78,7 +78,7 @@
                 const username = $('#username').val();
                 const password = $('#password').val();
                 const role = $('#role').is(':checked');
-                fetch('/api/users', {
+                fetch('https://greyluo.online/api/users', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -100,8 +100,7 @@
                 // remove the token from wherever you have stored it
 
                 localStorage.removeItem('token');
-                // redirect to the login page
-                window.location.href = '/login.html'; // replace '/login.html' with the path of your login page
+                window.location.href = '/logout.html';
             });
 
             // Handle click event for the update buttons

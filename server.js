@@ -17,7 +17,7 @@ var router = jsonServer.router('db.json');
 
 server.use(router);
 
-// server.listen(3001); //3001 means it's on /fapi.
+ server.listen(3001); //3001 means it's on /fapi.
 
 
 //actual endpoints
@@ -27,6 +27,8 @@ const mysql = require('mysql2/promise');
 const userRoute = require('./user')
 
 const app = express();
+const cors = require('cors');
+app.use(cors());
 
 app.use(express.json()); // middleware for parsing JSON data
 app.use("/users", userRoute)
@@ -51,8 +53,6 @@ const port = 3000;
 });
  */
 
-const cors = require('cors');
-app.use(cors());
 
 app.post('/static', (req, res) => {
   const data = req.body;
